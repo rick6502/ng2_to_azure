@@ -1,0 +1,10 @@
+<h2> Login </h2>
+<div class="container-fluid"></div>
+<div *ngIf="invalidLogin" class="alert alert-danger">Invalid username or password.</div>
+<br/>
+<div>
+  <p><label>User Name: <input #username /> </label> </p>
+  <p><label>Password: <input type="password" #password /> </label> </p>
+</div>
+<button (click)="login(username.value, password.value); "
+     class="btn btn-lg btn-primary btn-block">Login</button>

@@ -1,0 +1,95 @@
+<h4 id="title">Xmas List</h4>
+<table border="1" id="tbl">
+    <tr>
+      <th>Id</th><th>First Name</th><th>Last Name</th><th>birthday</th>
+      <th>street</th><th>city</th><th>province</th><th>postalcode</th>
+      <th>country</th><th>latitude</th><th>longitude</th><th>bad/good</th>
+    </tr>
+    <tr *ngFor="let s of xmasListingArray">
+      <td>{{ s.id }}</td>
+      <td>{{ s.firstName }}</td>
+      <td>{{ s.lastName }}</td>
+      <td>{{s.birthDate | date:'yyyy-MM-dd'}}</td>
+      <!-- <td>{{s.startDate | date:'fullDate'}}</td> -->
+      <td>{{ s.street }}</td>
+      <td>{{ s.city }}</td>
+      <td>{{ s.province }}</td>
+      <td>{{ s.postalCode }}</td>
+      <td>{{ s.country }}</td>
+      <td>{{ s.latitude }}</td>
+      <td>{{ s.longitude }}</td>
+      <td>{{ s.isNaughty }}</td>
+      <td> <button class="delete" title="delete child"  (click)="delete(s)">x</button> </td>
+      <td> <button title="edit child"  (click)="onSelect(s)">Edit</button> </td>
+      <td *ngIf="this.roleType === 'Admin'"> <button title="show map"  (click)="showMap(s)">Map</button> </td>
+    </tr>
+</table>
+<hr>
+
+<div id="map" class="map"></div>
+
+
+<div *ngIf="selectedChild">
+  <h2>Edit Child </h2>  
+  <div> <span>ID:</span> {{selectedChild.id}}</div>
+  <div> <label>First Name: <input [(ngModel)]="selectedChild.firstName"></label></div>
+  <div> <label>Last Name: <input [(ngModel)]="selectedChild.lastName"></label></div>
+  <div> <label>Birthday: <input [(ngModel)]="selectedChild.birthDate"></label></div>
+  <div> <label>Street: <input [(ngModel)]="selectedChild.street"></label></div>
+  <div> <label>City: <input [(ngModel)]="selectedChild.city"></label></div>
+  <div> <label>Province: <input [(ngModel)]="selectedChild.province"></label></div>
+  <div> <label>Postal Code: <input [(ngModel)]="selectedChild.postalCode"></label></div>
+  <div> <label>Country: <input [(ngModel)]="selectedChild.country"></label></div>
+  <div> <label>Latitude: <input [(ngModel)]="selectedChild.latitude"></label></div>
+  <div> <label>Longitude: <input [(ngModel)]="selectedChild.longitude"></label></div>
+  <div *ngIf="this.roleType === 'Admin'"> 
+      <label>is Naughty: <input type="checkbox" [(ngModel)]="selectedChild.isNaughty"></label>
+  </div>
+  <br>
+  <button (click)="save()">Save</button>
+  <button (click)="cancel()">Cancel</button>
+  </div>
+  <hr *ngIf="selectedChild">
+  
+  <h2> Add a Child</h2>
+  <div *ngIf="this.roleType === 'Admin'">
+    <p><label>First Name: <input #firstName /> </label> </p>
+    <p><label>Last Name: <input #lastName /> </label> </p>
+    <p><label>Birthday: <input #birthDate /> </label> </p>
+    <p><label>Street: <input #street /> </label> </p>
+    <p><label>City: <input #city /> </label> </p>
+    <p><label>Province: <input #province /> </label> </p>
+    <p><label>Postal Code: <input #postalCode /> </label> </p>
+    <p><label>Country: <input #country /> </label> </p>
+    <p><label>Latitude: <input #latitude /> </label> </p>
+    <p><label>Longitude: <input #longitude /> </label> </p>    
+    <p> <label>Is Naughty: <input type="checkbox" #isNaughty /> </label> </p>        
+      <button (click)="add(firstName.value, lastName.value, birthDate.value, street.value,
+                        city.value, province.value, postalCode.value, country.value, latitude.value,
+                        longitude.value, isNaughty.checked); 
+        firstName.value='';lastName.value='';birthDate.value='';street.value ='';city.value='';
+        province.value='';postalCode.value='';country.value='';latitude.value='';longitude.value='';
+        isNaughty.checked=false;">Add</button>
+  </div>
+  
+  <div *ngIf="this.roleType === 'Child'">
+        <p><label>First Name: <input #firstName /> </label> </p>
+        <p><label>Last Name: <input #lastName /> </label> </p>
+        <p><label>Birthday: <input #birthDate /> </label> </p>
+        <p><label>Street: <input #street /> </label> </p>
+        <p><label>City: <input #city /> </label> </p>
+        <p><label>Province: <input #province /> </label> </p>
+        <p><label>Postal Code: <input #postalCode /> </label> </p>
+        <p><label>Country: <input #country /> </label> </p>
+        <p><label>Latitude: <input #latitude /> </label> </p>
+        <p><label>Longitude: <input #longitude /> </label> </p>               
+        <button (click)="add(firstName.value, lastName.value, birthDate.value, street.value,
+        city.value, province.value, postalCode.value, country.value, latitude.value,
+        longitude.value, false); 
+        firstName.value='';lastName.value='';birthDate.value='';street.value ='';city.value='';
+        province.value='';postalCode.value='';country.value='';latitude.value='';longitude.value='';">Add</button>      
+  </div>
+  
+
+  
+  

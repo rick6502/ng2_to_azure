@@ -1,0 +1,11 @@
+<h2> Register </h2>
+<div class="container-fluid"></div>
+<div *ngIf="registerErr" class="alert alert-danger">Register Error</div>
+<div *ngIf="registerOk" class="alert alert-danger">Registion Ok</div>
+<div>
+  <p><label>User Name: <input #username /> </label> </p>
+  <p><label>Email: <input type="email" #email /> </label> </p>
+  <p><label>Password: <input type="password"  #password /> </label> </p>
+</div>
+<button (click)="register(username.value, email.value, password.value); username.value = ''; email.value='';password.value='' "
+     class="btn btn-lg btn-primary btn-block">Register</button>
